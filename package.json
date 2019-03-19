@@ -1,0 +1,24 @@
+{
+  "name": "aerys-discord",
+  "version": "1.0.0",
+  "description": "",
+  "main": "compiled/index.js",
+  "scripts": {
+    "compile": "tsc",
+    "start": "npm run-script compile && node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aery-chan/aerys-discord.git"
+  },
+  "author": "Aery",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/aery-chan/aerys-discord/issues"
+  },
+  "homepage": "https://github.com/aery-chan/aerys-discord#readme",
+  "devDependencies": {
+    "@types/node": "^11.11.3",
+    "typescript": "^3.3.3333"
+  }
+}

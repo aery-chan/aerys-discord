@@ -1,0 +1,4 @@
+[VoiceChannel]
+parent = "voice"
+name = "General"
+index = 0

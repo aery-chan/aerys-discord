@@ -1,0 +1,6 @@
+[Role]
+name = "Bot"
+index = 0
+
+[permissions]
+administrator = true
