@@ -9,8 +9,8 @@ export class ChannelModule<options, cache> extends Module<options, cache> {
     private _component: component_constructor<options, cache>;
     private type: string;
 
-    constructor(component: component_constructor<options, cache>, type: string) {
-        super();
+    constructor(name: string, component: component_constructor<options, cache>, type: string) {
+        super(name);
 
         this._component = component;
         this.type = type;
