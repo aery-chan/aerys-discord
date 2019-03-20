@@ -1,13 +1,14 @@
+import { ChannelModule } from "../classes/ChannelModule";
 import {
     ChannelComponent,
     ChannelComponentOptions,
     ChannelComponentCache
 } from "../classes/ChannelComponent";
 
-export class TextChannelComponent extends ChannelComponent<ChannelComponentOptions, ChannelComponentCache> {
+export class TextChannelComponent extends ChannelComponent<ChannelModule<ChannelComponentOptions, ChannelComponentCache>, ChannelComponentOptions, ChannelComponentCache> {
 
-    constructor(options: ChannelComponentOptions, cache: ChannelComponentCache) {
-        super(options, cache, "text");
+    constructor(module: ChannelModule<ChannelComponentOptions, ChannelComponentCache>, options: ChannelComponentOptions, cache: ChannelComponentCache) {
+        super(module, options, cache, "text");
     }
 
 }

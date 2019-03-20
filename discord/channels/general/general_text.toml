@@ -1,3 +1,4 @@
 [TextChannel]
 parent = "general"
 name = "general"
+index = 0

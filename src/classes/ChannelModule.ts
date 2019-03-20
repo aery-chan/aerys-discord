@@ -2,21 +2,21 @@ import { Module } from "../classes/Module";
 import { Guild } from "discord.js";
 import { Component } from "../classes/Component";
 
-type component_constructor<options, cache> = new (options: options, cache: cache) => Component<options, cache>
+type component_constructor<module, options, cache> = new (module: module, options: options, cache: cache) => Component<module, options, cache>
 
 export abstract class ChannelModule<options, cache> extends Module<options, cache> {
 
-    private _component: component_constructor<options, cache>;
+    private _component: component_constructor<ChannelModule<options, cache>, options, cache>;
     private type: string;
 
-    constructor(component: component_constructor<options, cache>, type: string) {
+    constructor(component: component_constructor<ChannelModule<options, cache>, options, cache>, type: string) {
         super();
 
         this._component = component;
         this.type = type;
     }
 
-    get component(): component_constructor<options, cache> {
+    get component(): component_constructor<ChannelModule<options, cache>, options, cache> {
         return this._component;
     }
 
@@ -26,7 +26,7 @@ export abstract class ChannelModule<options, cache> extends Module<options, cach
                 let cleanup: boolean = true;
 
                 for (const id in this.components) {
-                    const channel_component: Component<any, any> = this.components[id];
+                    const channel_component: Component<any, any, any> = this.components[id];
 
                     if (channel_component.cache && channel_component.cache.id == channel.id) {
                         cleanup = false;

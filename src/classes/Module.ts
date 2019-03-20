@@ -6,11 +6,11 @@ export abstract class Module<options, cache> {
     components: {} = {};
 
     abstract get name(): string
-    abstract get component(): new (options: options, cache: cache) => Component<options, cache>
+    abstract get component(): new (module: Module<options, cache>, options: options, cache: cache) => Component<Module<options, cache>, options, cache>
 
     async init(guild: Guild): Promise<void> {
         for (const id in this.components) {
-            const component: Component<options, cache> = this.components[id];
+            const component: Component<Module<options, cache>, options, cache> = this.components[id];
             const result: Promise<void> | void = component.init(guild);
 
             if (result instanceof Promise) {

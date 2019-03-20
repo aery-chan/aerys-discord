@@ -1,3 +1,4 @@
 [TextChannel]
 parent = "general"
 name = "lewd"
+index = 1

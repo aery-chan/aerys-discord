@@ -23,6 +23,7 @@ export const modules: any = {
 };
 const passes: string[] = [
     "parent",
+    "index",
     "name"
 ];
 
@@ -67,7 +68,7 @@ async function load_directory(directory: mlc.ConfigDirectory): Promise<void> {
                         component_cache = cache[module_name][id] = {};
                     }
 
-                    module.components[id] = new module.component(file.content[module_name], component_cache);
+                    module.components[id] = new module.component(module, file.content[module_name], component_cache);
                 }
             }
         } else {
@@ -119,7 +120,7 @@ export async function render(): Promise<void> {
             const module: Module<any, any> = modules[module_name];
 
             for (const id in module.components) {
-                const component: Component<any, any> = module.components[id];
+                const component: Component<any, any, any> = module.components[id];
                 const render: () => Promise<void> | void = component.passes[pass];
 
                 if (render) {
@@ -134,66 +135,9 @@ export async function render(): Promise<void> {
             }
         }
     }
-}
-
-/*export async function render(): Promise<void> {
-    const passes: {} = {};
-
-    for (const module_name in modules) {
-        const module: Module<any, any> = modules[module_name];
-
-        passes[module_name] = module.passes();
-    }
-
-    let has_pass: boolean = false;
-    let i: number = 0;
-
-    while (true) {
-        has_pass = false;
-
-        for (const module_name in modules) {
-            const module: Module<any, any> = modules[module_name];
-
-            for (const id in module.components) {
-                const pass = passes[module_name][id][i];
-    
-                if (pass) {
-                    has_pass = true;
-                }
-            }
-        }
-
-        if (has_pass) {
-            console.log(chalk.cyan(`[Pass ${i + 1}]`));
-
-            for (const module_name in modules) {
-                console.log(chalk.gray(`[${module_name}]`));
-
-                const module: Module<any, any> = modules[module_name];
-
-                for (const id in module.components) {
-                    console.log(`Rendering <${id}>`);
-    
-                    const pass = passes[module_name][id][i];
-    
-                    if (pass) {
-                        const result: Promise<void> | void = pass();
-    
-                        if (result instanceof Promise) {
-                            await result;
-                        }
-                    }
-                }
-            }
-
-            i++;
-        } else {
-            break;
-        }
-    }
 
     write_cache();
-}*/
+}
 
 export async function cleanup(guild: Guild): Promise<void> {
     for (const module_name in modules) {

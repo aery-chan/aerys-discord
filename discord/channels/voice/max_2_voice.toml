@@ -1,3 +1,4 @@
 [VoiceChannel]
 parent = "voice"
 name = "Max 2"
+index = 0
