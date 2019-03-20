@@ -36,4 +36,4 @@ async function main(): Promise<void> {
     }
 }
 
-main();
+setTimeout(main, 2000);

@@ -4,11 +4,41 @@ import {
     ChannelComponentOptions,
     ChannelComponentCache
 } from "../classes/ChannelComponent";
+import { TextChannel } from "discord.js";
 
-export class TextChannelComponent extends ChannelComponent<ChannelModule<ChannelComponentOptions, ChannelComponentCache>, ChannelComponentOptions, ChannelComponentCache> {
+type TextChannelOptions = ChannelComponentOptions & {
+    nsfw?: boolean
+}
 
-    constructor(module: ChannelModule<ChannelComponentOptions, ChannelComponentCache>, options: ChannelComponentOptions, cache: ChannelComponentCache) {
+export class TextChannelComponent extends ChannelComponent<ChannelModule<TextChannelOptions, ChannelComponentCache>, TextChannelOptions, ChannelComponentCache> {
+
+    constructor(module: ChannelModule<TextChannelOptions, ChannelComponentCache>, options: TextChannelOptions, cache: ChannelComponentCache) {
         super(module, options, cache, "text");
+    }
+
+    get passes(): {} {
+        return {
+            parent: () => this.render_parent(),
+            index: () => this.render_index(),
+            name: () => this.render_name(),
+            nsfw: () => this.render_nsfw()
+        };
+    }
+
+    private async render_nsfw(): Promise<void> {
+        const channel: TextChannel = <TextChannel>this.channel;
+
+        if (this.options.nsfw) {
+            if (!channel.nsfw) {
+                await channel.setNSFW(true, "");
+                console.log("Marked as NSFW");
+            }
+        } else {
+            if (channel.nsfw) {
+                await channel.setNSFW(false, "");
+                console.log("Unmarked as NSFW");
+            }
+        }
     }
 
 }

@@ -24,7 +24,8 @@ export const modules: any = {
 const passes: string[] = [
     "parent",
     "index",
-    "name"
+    "name",
+    "nsfw"
 ];
 
 let cache: {};
