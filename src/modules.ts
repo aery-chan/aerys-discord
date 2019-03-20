@@ -5,6 +5,7 @@ import * as mlc from "@aery/mlc";
 import { Module } from "./classes/Module";
 import { TextChannelModule } from "./modules/TextChannelModule.module";
 import { VoiceChannelModule } from "./modules/VoiceChannelModule.module";
+import { CategoryChannelModule } from "./modules/CategoryChannelModule.module";
 
 import { TOMLFormat } from "./classes/TOMLFormat";
 
@@ -14,7 +15,8 @@ let cache: {};
 
 export const modules: {} = {
     TextChannel: new TextChannelModule(),
-    VoiceChannel: new VoiceChannelModule()
+    VoiceChannel: new VoiceChannelModule(),
+    CategoryChannel: new CategoryChannelModule()
 };
 
 async function load_directory(directory: mlc.ConfigDirectory): Promise<void> {
