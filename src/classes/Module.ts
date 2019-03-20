@@ -1,4 +1,5 @@
 import { Component } from "./Component";
+import { Guild } from "discord.js";
 
 export abstract class Module<options, cache> {
 
@@ -10,19 +11,24 @@ export abstract class Module<options, cache> {
 
     abstract get name(): string
 
-    init(guild): void {
+    async init(guild: Guild): Promise<void> {
         console.log("Initializing");
 
         for (const id in this.components) {
             console.log(`Intializing <${id}>`);
 
             const component: Component<options, cache> = this.components[id];
+            const result: Promise<void> | void = component.init(guild);
 
-            component.init(guild);
+            if (result instanceof Promise) {
+                await result;
+            }
         }
     }
 
-    render(): void {
+    abstract cleanup(guild: Guild): Promise<void> | void
+
+    async render(): Promise<void> {
         const passes: {} = {};
 
         console.log("[Preparing rendering]");
@@ -50,14 +56,17 @@ export abstract class Module<options, cache> {
 
                 if (pass) {
                     had_pass = true;
-                    pass();
+
+                    const result: Promise<void> | void = pass();
+
+                    if (result instanceof Promise) {
+                        await result;
+                    }
                 }
             }
 
             i++;
         }
     }
-
-    abstract cleanup(): void
 
 }

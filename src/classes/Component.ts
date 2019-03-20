@@ -1,3 +1,5 @@
+import { Guild } from "discord.js";
+
 export abstract class Component<options, cache> {
 
     options: options;
@@ -8,8 +10,8 @@ export abstract class Component<options, cache> {
         this.cache = cache;
     }
 
-    abstract init(guild): void
+    abstract init(guild: Guild): Promise<void> | void
 
-    abstract render(): (() => void)[]
+    abstract render(): (() => Promise<void> | void)[]
 
 }
