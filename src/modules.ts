@@ -4,13 +4,18 @@ import * as mlc from "@aery/mlc";
 
 import { Module } from "./classes/Module";
 import { TextChannelModule } from "./modules/TextChannelModule.module";
+import { VoiceChannelModule } from "./modules/VoiceChannelModule.module";
+
 import { TOMLFormat } from "./classes/TOMLFormat";
 
 const discord_directory: mlc.ConfigDirectory = mlc.directory("discord", new TOMLFormat());
 
 let cache: {};
 
-export const modules: {} = { TextChannel: new TextChannelModule() };
+export const modules: {} = {
+    TextChannel: new TextChannelModule(),
+    VoiceChannel: new VoiceChannelModule()
+};
 
 async function load_directory(directory: mlc.ConfigDirectory): Promise<void> {
     for (const file_name in directory.files) {
@@ -47,7 +52,7 @@ function clean_cache(): void {
             const components: {} = cache[module_name];
     
             for (const id in components) {
-                if (module.component[id] === undefined) {
+                if (module.components[id] === undefined) {
                     delete components[id];
                 }
             }
