@@ -3,13 +3,9 @@ import { Guild } from "discord.js";
 
 export abstract class Module<options, cache> {
 
-    components: {}
+    components: {} = {};
 
-    constructor(components: {}){
-        this.components = components;
-    }
-
-    abstract get name(): string
+    abstract get component(): new (options: options, cache: cache) => Component<options, cache>;
 
     async init(guild: Guild): Promise<void> {
         console.log("Initializing");

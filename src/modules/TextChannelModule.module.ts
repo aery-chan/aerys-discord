@@ -5,11 +5,12 @@ import {
     TextChannelComponent
 } from "../components/TextChannelComponent.component";
 import { Guild } from "discord.js";
+import { Component } from "../classes/Component";
 
-class TextChannelModule extends Module<TextChannelComponentOptions, TextChannelComponentCache> {
+export class TextChannelModule extends Module<TextChannelComponentOptions, TextChannelComponentCache> {
 
-    get name(): string {
-        return "TextChannel";
+    get component(): new (options: TextChannelComponentOptions, cache: TextChannelComponentCache) => Component<TextChannelComponentOptions, TextChannelComponentCache> {
+        return TextChannelComponent;
     }
 
     async cleanup(guild: Guild): Promise<void> {

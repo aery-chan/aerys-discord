@@ -22,6 +22,8 @@
     "typescript": "^3.3.3333"
   },
   "dependencies": {
+    "@aery/mlc": "^1.4.0",
+    "@iarna/toml": "^2.2.3",
     "discord.js": "^11.4.2"
   }
 }
