@@ -10,7 +10,7 @@ export abstract class Component<options, cache> {
         this.cache = cache;
     }
 
-    abstract get passes(): (() => Promise<void> | void)[]
+    abstract get passes(): {}
 
     abstract init(guild: Guild): Promise<void> | void
 

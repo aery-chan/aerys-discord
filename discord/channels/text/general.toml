@@ -1,4 +1,0 @@
-[TextChannel]
-parent = "text"
-name = "general"
-index = 0

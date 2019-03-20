@@ -1,0 +1,3 @@
+[VoiceChannel]
+parent = "voice"
+name = "Max 3"

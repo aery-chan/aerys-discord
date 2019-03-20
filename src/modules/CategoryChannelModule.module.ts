@@ -8,7 +8,11 @@ import { CategoryChannelComponent } from "../components/CategoryChannelComponent
 export class CategoryChannelModule extends ChannelModule<ChannelComponentOptions, ChannelComponentCache> {
 
     constructor() {
-        super("CategoryChannel", CategoryChannelComponent, "category");
+        super(CategoryChannelComponent, "category");
+    }
+
+    get name(): string {
+        return "CategoryChannel";
     }
 
 }

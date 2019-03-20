@@ -4,13 +4,13 @@ import { Component } from "../classes/Component";
 
 type component_constructor<options, cache> = new (options: options, cache: cache) => Component<options, cache>
 
-export class ChannelModule<options, cache> extends Module<options, cache> {
+export abstract class ChannelModule<options, cache> extends Module<options, cache> {
 
     private _component: component_constructor<options, cache>;
     private type: string;
 
-    constructor(name: string, component: component_constructor<options, cache>, type: string) {
-        super(name);
+    constructor(component: component_constructor<options, cache>, type: string) {
+        super();
 
         this._component = component;
         this.type = type;

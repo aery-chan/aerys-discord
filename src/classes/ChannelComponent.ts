@@ -29,11 +29,11 @@ export class ChannelComponent<options extends ChannelComponentOptions, cache ext
         this.type = type;
     }
     
-    get passes(): (() => Promise<void>)[] {
-        return [
-            () => this.render_parent(),
-            () => this.render_name()
-        ];
+    get passes(): {} {
+        return {
+            parent: () => this.render_parent(),
+            name: () => this.render_name()
+        };
     }
 
     async init(guild: Guild): Promise<void> {

@@ -10,18 +10,23 @@ import { VoiceChannelModule } from "./modules/VoiceChannelModule.module";
 import { CategoryChannelModule } from "./modules/CategoryChannelModule.module";
 
 import { TOMLFormat } from "./classes/TOMLFormat";
+import { Component } from "./classes/Component";
 
 const discord_directory: mlc.ConfigDirectory = mlc.directory("discord", new TOMLFormat());
 const cache_file: mlc.ConfigFile = mlc.file("cache", new mlc.formats.JSONFormat())
     .defaults({});
-
-let cache: {};
 
 export const modules: any = {
     TextChannel: new TextChannelModule(),
     VoiceChannel: new VoiceChannelModule(),
     CategoryChannel: new CategoryChannelModule()
 };
+const passes: string[] = [
+    "parent",
+    "name"
+];
+
+let cache: {};
 
 function clean_cache(): void {
     for (const module_name in cache) {
@@ -103,6 +108,35 @@ export async function init(guild: Guild): Promise<void> {
 }
 
 export async function render(): Promise<void> {
+    for (let i = 0; i < passes.length; i++) {
+        const pass: string = passes[i];
+
+        console.log(chalk.cyan(`[Pass: ${pass}]`));
+
+        for (const module_name in modules) {
+            console.log(chalk.gray(`[${module_name}]`));
+
+            const module: Module<any, any> = modules[module_name];
+
+            for (const id in module.components) {
+                const component: Component<any, any> = module.components[id];
+                const render: () => Promise<void> | void = component.passes[pass];
+
+                if (render) {
+                    console.log(`Rendering <${id}>`);
+
+                    const result: Promise<void> | void = render();
+
+                    if (result instanceof Promise) {
+                        await result;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*export async function render(): Promise<void> {
     const passes: {} = {};
 
     for (const module_name in modules) {
@@ -159,7 +193,7 @@ export async function render(): Promise<void> {
     }
 
     write_cache();
-}
+}*/
 
 export async function cleanup(guild: Guild): Promise<void> {
     for (const module_name in modules) {

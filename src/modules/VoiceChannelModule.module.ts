@@ -8,7 +8,11 @@ import { VoiceChannelComponent } from "../components/VoiceChannelComponent.compo
 export class VoiceChannelModule extends ChannelModule<ChannelComponentOptions, ChannelComponentCache> {
 
     constructor() {
-        super("VoiceChannel", VoiceChannelComponent, "voice");
+        super(VoiceChannelComponent, "voice");
+    }
+
+    get name(): string {
+        return "VoiceChannel";
     }
 
 }

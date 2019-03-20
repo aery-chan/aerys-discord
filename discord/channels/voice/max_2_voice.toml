@@ -1,4 +1,3 @@
 [VoiceChannel]
 parent = "voice"
-name = "General"
-index = 0
+name = "Max 2"

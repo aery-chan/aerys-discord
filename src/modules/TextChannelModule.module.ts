@@ -8,7 +8,11 @@ import { TextChannelComponent } from "../components/TextChannelComponent.compone
 export class TextChannelModule extends ChannelModule<ChannelComponentOptions, ChannelComponentCache> {
 
     constructor() {
-        super("TextChannel", TextChannelComponent, "text");
+        super(TextChannelComponent, "text");
+    }
+
+    get name(): string {
+        return "TextChannel";
     }
 
 }
