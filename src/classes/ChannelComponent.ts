@@ -71,7 +71,7 @@ export abstract class ChannelComponent<module extends Module<any, any>, options 
                 grouped_expected_components.push(component);
             }
 
-            if (component.channel.parentID == this.channel.parentID) {
+            if (component.channel.parent == this.channel.parent) {
                 grouped_actual_channels.push(component.channel);
             }
         }
