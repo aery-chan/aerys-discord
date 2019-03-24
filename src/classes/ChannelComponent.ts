@@ -19,7 +19,7 @@ export type ChannelComponentCache = {
     id?: string
 }
 
-export class ChannelComponent<module extends Module<any, any>, options extends ChannelComponentOptions, cache extends ChannelComponentCache> extends Component<module, options, cache> {
+export abstract class ChannelComponent<module extends Module<any, any>, options extends ChannelComponentOptions, cache extends ChannelComponentCache> extends Component<module, options, cache> {
 
     protected type: type;
     protected channel: GuildChannel;
@@ -28,14 +28,6 @@ export class ChannelComponent<module extends Module<any, any>, options extends C
         super(module, options, cache);
 
         this.type = type;
-    }
-    
-    get passes(): {} {
-        return {
-            parent: () => this.render_parent(),
-            index: () => this.render_index(),
-            name: () => this.render_name()
-        };
     }
 
     async init(guild: Guild): Promise<void> {
@@ -66,18 +58,38 @@ export class ChannelComponent<module extends Module<any, any>, options extends C
     }
 
     protected async render_index(): Promise<void> {
-        let index: number = 0;
+        let expected_index: number = 0;
+        let actual_index: number = 0;
+
+        const grouped_expected_components: ChannelComponent<module, options, cache>[] = [];
+        const grouped_actual_channels: GuildChannel[] = [];
 
         for (const id in this.module.components) {
             const component: ChannelComponent<module, options, cache> = this.module.components[id];
 
-            if (this.options.index > component.options.index) {
-                index++;
+            if (component.options.parent == this.options.parent) {
+                grouped_expected_components.push(component);
+            }
+
+            if (component.channel.parentID == this.channel.parentID) {
+                grouped_actual_channels.push(component.channel);
             }
         }
 
-        if (this.channel.position != index) {
-            await this.channel.setPosition(index);
+        for (const component of grouped_expected_components) {
+            if (this.options.index > component.options.index) {
+                expected_index++;
+            }
+        }
+
+        for (const channel of grouped_actual_channels) {
+            if (this.channel.position > channel.position) {
+                actual_index++;
+            }
+        }
+
+        if (expected_index != actual_index) {
+            await this.channel.setPosition(expected_index);
             console.log("Moved");
         }
     }

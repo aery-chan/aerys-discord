@@ -25,7 +25,8 @@ const passes: string[] = [
     "parent",
     "index",
     "name",
-    "nsfw"
+    "nsfw",
+    "max"
 ];
 
 let cache: {};
