@@ -117,17 +117,28 @@ export async function render(): Promise<void> {
         console.log(chalk.cyan(`[Pass: ${pass}]`));
 
         for (const module_name in modules) {
-            console.log(chalk.gray(`[${module_name}]`));
-
             const module: Module<any, any> = modules[module_name];
+            const module_passes: {} = {};
+
+            let has_pass: boolean = false;
 
             for (const id in module.components) {
                 const component: Component<any, any, any> = module.components[id];
                 const render: () => Promise<void> | void = component.passes[pass];
 
                 if (render) {
+                    has_pass = true;
+                    module_passes[id] = render;
+                }
+            }
+
+            if (has_pass) {
+                console.log(chalk.gray(`[${module_name}]`));
+
+                for (const id in module.components) {
                     console.log(`Rendering <${id}>`);
 
+                    const render: () => Promise<void> | void = module_passes[id];
                     const result: Promise<void> | void = render();
 
                     if (result instanceof Promise) {
