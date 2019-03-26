@@ -1,0 +1,4 @@
+[TextChannel]
+parent = "text"
+name = "spam"
+index = 1

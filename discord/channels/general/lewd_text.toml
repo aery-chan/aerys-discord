@@ -3,3 +3,10 @@ parent = "general"
 name = "lewd"
 index = 1
 nsfw = true
+
+    [TextChannel.permissions]
+        [TextChannel.permissions._everyone]
+        read = false
+
+        [TextChannel.permissions.lewd]
+        read = true
