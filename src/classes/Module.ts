@@ -1,12 +1,14 @@
 import { Component } from "./Component";
 import { Guild } from "discord.js";
 
+export type component_constructor<module, options, cache> = new (module: module, options: options, cache: cache) => Component<module, options, cache>
+
 export abstract class Module<options, cache> {
 
     components: {} = {};
 
     abstract get name(): string
-    abstract get component(): new (module: Module<options, cache>, options: options, cache: cache) => Component<Module<options, cache>, options, cache>
+    abstract get component(): component_constructor<Module<options, cache>, options, cache>
 
     async init(guild: Guild): Promise<void> {
         for (const id in this.components) {

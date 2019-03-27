@@ -1,13 +1,13 @@
+import { CategoryChannelModule } from "../modules/CategoryChannelModule.module";
 import {
     ChannelComponent,
     ChannelComponentOptions,
     ChannelComponentCache
 } from "../classes/ChannelComponent";
-import { ChannelModule } from "../classes/ChannelModule";
 
-export class CategoryChannelComponent extends ChannelComponent<ChannelModule<ChannelComponentOptions, ChannelComponentCache>, ChannelComponentOptions, ChannelComponentCache> {
+export class CategoryChannelComponent extends ChannelComponent<CategoryChannelModule, ChannelComponentOptions, ChannelComponentCache> {
 
-    constructor(module: ChannelModule<ChannelComponentOptions, ChannelComponentCache>, options: ChannelComponentOptions, cache: ChannelComponentCache) {
+    constructor(module: CategoryChannelModule, options: ChannelComponentOptions, cache: ChannelComponentCache) {
         super(module, options, cache, "category");
     }
 

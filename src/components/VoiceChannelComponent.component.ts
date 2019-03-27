@@ -1,4 +1,4 @@
-import { ChannelModule } from "../classes/ChannelModule";
+import { VoiceChannelModule } from "../modules/VoiceChannelModule.module";
 import {
     ChannelComponent,
     ChannelComponentOptions,
@@ -10,9 +10,9 @@ type VoiceChannelOptions = ChannelComponentOptions & {
     max?: number
 }
 
-export class VoiceChannelComponent extends ChannelComponent<ChannelModule<VoiceChannelOptions, ChannelComponentCache>, VoiceChannelOptions, ChannelComponentCache> {
+export class VoiceChannelComponent extends ChannelComponent<VoiceChannelModule, VoiceChannelOptions, ChannelComponentCache> {
 
-    constructor(module: ChannelModule<VoiceChannelOptions, ChannelComponentCache>, options: VoiceChannelOptions, cache: ChannelComponentCache) {
+    constructor(module: VoiceChannelModule, options: VoiceChannelOptions, cache: ChannelComponentCache) {
         super(module, options, cache, "voice");
     }
 

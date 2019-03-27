@@ -1,8 +1,9 @@
-import { Module } from "../classes/Module";
+import {
+    Module,
+    component_constructor
+} from "../classes/Module";
 import { Guild } from "discord.js";
 import { Component } from "../classes/Component";
-
-type component_constructor<module, options, cache> = new (module: module, options: options, cache: cache) => Component<module, options, cache>
 
 export abstract class ChannelModule<options, cache> extends Module<options, cache> {
 

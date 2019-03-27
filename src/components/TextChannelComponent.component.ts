@@ -1,4 +1,4 @@
-import { ChannelModule } from "../classes/ChannelModule";
+import { TextChannelModule } from "../modules/TextChannelModule.module";
 import {
     ChannelComponent,
     ChannelComponentOptions,
@@ -10,9 +10,9 @@ type TextChannelOptions = ChannelComponentOptions & {
     nsfw?: boolean
 }
 
-export class TextChannelComponent extends ChannelComponent<ChannelModule<TextChannelOptions, ChannelComponentCache>, TextChannelOptions, ChannelComponentCache> {
+export class TextChannelComponent extends ChannelComponent<TextChannelModule, TextChannelOptions, ChannelComponentCache> {
 
-    constructor(module: ChannelModule<TextChannelOptions, ChannelComponentCache>, options: TextChannelOptions, cache: ChannelComponentCache) {
+    constructor(module: TextChannelModule, options: TextChannelOptions, cache: ChannelComponentCache) {
         super(module, options, cache, "text");
     }
 
