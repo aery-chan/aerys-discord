@@ -12,10 +12,6 @@ import { CategoryChannelModule } from "./modules/CategoryChannelModule.module";
 import { TOMLFormat } from "./classes/TOMLFormat";
 import { Component } from "./classes/Component";
 
-const discord_directory: mlc.ConfigDirectory = mlc.directory("discord", new TOMLFormat());
-const cache_file: mlc.ConfigFile = mlc.file("cache", new mlc.formats.JSONFormat())
-    .defaults({});
-
 export const modules: any = {
     TextChannel: new TextChannelModule(),
     VoiceChannel: new VoiceChannelModule(),
@@ -29,50 +25,56 @@ const passes: string[] = [
     "max"
 ];
 
-let cache: {};
+const discord_directory: mlc.ConfigDirectory = mlc.directory("discord", new TOMLFormat());
+const cache_directory: mlc.ConfigDirectory = mlc.directory("cache", new mlc.formats.JSONFormat());
 
-function clean_cache(): void {
-    for (const module_name in cache) {
-        if (modules[module_name] === undefined) {
-            delete cache[module_name];
-        } else {
-            const module: Module<any, any> = modules[module_name];
-            const components: {} = cache[module_name];
+async function load_component(module: Module<any>, id: string, options: any): Promise<void> {
+    let module_cache: mlc.ConfigDirectory = cache_directory.files[module.name];
     
-            for (const id in components) {
-                if (module.components[id] === undefined) {
-                    delete components[id];
-                }
-            }
-        }
+    if (!module_cache) {
+        module_cache = cache_directory.files[module.name] = await new mlc.ConfigDirectory(
+            path.resolve(cache_directory.directory_path, module.name),
+            cache_directory.format
+        ).read();
+    }
+
+    let component_cache: mlc.ConfigFile = module_cache.files[id];
+        
+    if (!component_cache) {
+        component_cache = module_cache.files[id] = await new mlc.ConfigFile(
+            path.resolve(module_cache.directory_path, id),
+            module_cache.format
+        ).read();
+    }
+
+    let component: Component<typeof module, any> = module.components[id];
+
+    if (component) {
+        component.cache = component_cache;
+        component.options = options;
+    } else {
+        component = module.components[id] = new module.component(module, options, component_cache);
     }
 }
 
-async function write_cache(): Promise<void> {
-    cache_file.content = cache;
-    await cache_file.write();
+async function load_file(file: mlc.ConfigFile): Promise<void> {
+    const id: string = path.basename(file.file_path, path.extname(file.file_path));
+
+    for (const module_name in modules) {
+        const module: Module<any> = modules[module_name];
+
+        if (file.content[module.name]) {
+            await load_component(module, id, file.content[module.name]);
+        }
+    }
 }
 
 async function load_directory(directory: mlc.ConfigDirectory): Promise<void> {
     for (const file_name in directory.files) {
         const file: mlc.ConfigFile | mlc.ConfigDirectory = directory.files[file_name];
-        
+
         if (file instanceof mlc.ConfigFile) {
-            const id: string = path.basename(file_name, path.extname(file_name));
-    
-            for (const module_name in modules) {
-                const module: Module<any, any> = modules[module_name];
-
-                if (file.content[module_name]) {
-                    let component_cache: {} = cache[module_name][id];
-
-                    if (!component_cache) {
-                        component_cache = cache[module_name][id] = {};
-                    }
-
-                    module.components[id] = new module.component(module, file.content[module_name], component_cache);
-                }
-            }
+            await load_file(file);
         } else {
             await load_directory(file);
         }
@@ -84,30 +86,20 @@ export async function load(): Promise<void> {
         read_directories: true,
         recursive: true
     });
+    await cache_directory.read({
+        read_directories: true,
+        recursive: true
+    });
 
-    await cache_file.read();
-
-    cache = cache_file.content;
-
-    for (const module_name in modules) {
-        if (!cache[module_name]) {
-            cache[module_name] = {};
-        }
-    }
-
-    await load_directory(discord_directory);
-    clean_cache();
-    await write_cache();
+    load_directory(discord_directory);
 }
 
 export async function init(guild: Guild): Promise<void> {
     for (const module_name in modules) {
-        const module: Module<any, any> = modules[module_name];
+        const module: Module<any> = modules[module_name];
 
         await module.init(guild);
     }
-    
-    write_cache();
 }
 
 export async function render(): Promise<void> {
@@ -117,13 +109,13 @@ export async function render(): Promise<void> {
         console.log(chalk.cyan(`[Pass: ${pass}]`));
 
         for (const module_name in modules) {
-            const module: Module<any, any> = modules[module_name];
+            const module: Module<any> = modules[module_name];
             const module_passes: {} = {};
 
             let has_pass: boolean = false;
 
             for (const id in module.components) {
-                const component: Component<any, any, any> = module.components[id];
+                const component: Component<any, any> = module.components[id];
                 const render: () => Promise<void> | void = component.passes[pass];
 
                 if (render) {
@@ -148,14 +140,12 @@ export async function render(): Promise<void> {
             }
         }
     }
-
-    write_cache();
 }
 
-export async function cleanup(guild: Guild): Promise<void> {
+export async function clean(guild: Guild): Promise<void> {
     for (const module_name in modules) {
-        const module: Module<any, any> = modules[module_name];
+        const module: Module<any> = modules[module_name];
 
-        await module.cleanup(guild);
+        await module.clean(guild);
     }
 }

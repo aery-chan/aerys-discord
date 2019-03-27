@@ -6,11 +6,7 @@ export type RoleComponentOptions = {
     name: string
 }
 
-export type RoleComponentCache = {
-    id: string
-}
-
-export class RoleComponent extends Component<RoleModule, RoleComponentOptions, RoleComponentCache> {
+export class RoleComponent extends Component<RoleModule, RoleComponentOptions> {
 
     async init(guild: Guild): Promise<void> {
 
