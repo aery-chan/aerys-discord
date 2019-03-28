@@ -22,7 +22,7 @@
     "typescript": "^3.3.3333"
   },
   "dependencies": {
-    "@aery/mlc": "^1.4.0",
+    "@aery/mlc": "^1.4.2",
     "@iarna/toml": "^2.2.3",
     "chalk": "^2.4.2",
     "discord.js": "^11.4.2"
