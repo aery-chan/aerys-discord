@@ -1,18 +1,19 @@
-import { ChannelModule } from "../classes/ChannelModule";
+import { ConfigFile } from "@aery/mlc";
+import { TextChannel } from "discord.js";
+
+import { TextChannelModule } from "../modules/TextChannelModule.module";
 import {
     ChannelComponent,
-    ChannelComponentOptions,
-    ChannelComponentCache
+    ChannelComponentOptions
 } from "../classes/ChannelComponent";
-import { TextChannel } from "discord.js";
 
 type TextChannelOptions = ChannelComponentOptions & {
     nsfw?: boolean
 }
 
-export class TextChannelComponent extends ChannelComponent<ChannelModule<TextChannelOptions, ChannelComponentCache>, TextChannelOptions, ChannelComponentCache> {
+export class TextChannelComponent extends ChannelComponent<TextChannelModule, TextChannelOptions> {
 
-    constructor(module: ChannelModule<TextChannelOptions, ChannelComponentCache>, options: TextChannelOptions, cache: ChannelComponentCache) {
+    constructor(module: TextChannelModule, options: TextChannelOptions, cache: ConfigFile) {
         super(module, options, cache, "text");
     }
 

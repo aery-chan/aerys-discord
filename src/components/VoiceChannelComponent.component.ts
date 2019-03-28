@@ -1,18 +1,19 @@
-import { ChannelModule } from "../classes/ChannelModule";
+import { VoiceChannelModule } from "../modules/VoiceChannelModule.module";
 import {
     ChannelComponent,
-    ChannelComponentOptions,
-    ChannelComponentCache
+    ChannelComponentOptions
 } from "../classes/ChannelComponent";
+
+import { ConfigFile } from "@aery/mlc";
 import { VoiceChannel } from "discord.js";
 
 type VoiceChannelOptions = ChannelComponentOptions & {
     max?: number
 }
 
-export class VoiceChannelComponent extends ChannelComponent<ChannelModule<VoiceChannelOptions, ChannelComponentCache>, VoiceChannelOptions, ChannelComponentCache> {
+export class VoiceChannelComponent extends ChannelComponent<VoiceChannelModule, VoiceChannelOptions> {
 
-    constructor(module: ChannelModule<VoiceChannelOptions, ChannelComponentCache>, options: VoiceChannelOptions, cache: ChannelComponentCache) {
+    constructor(module: VoiceChannelModule, options: VoiceChannelOptions, cache: ConfigFile) {
         super(module, options, cache, "voice");
     }
 

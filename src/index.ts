@@ -20,9 +20,9 @@ client.on("ready", async () => {
         throw new Error("Invalid guild");
     }
     
+    await modules.clean(guild);
     await modules.init(guild);
     await modules.render();
-    await modules.cleanup(guild);
 });
 
 async function main(): Promise<void> {

@@ -1,5 +1,6 @@
 import { Module } from "./Module";
 import { Component } from "../classes/Component";
+import { ConfigFile } from "@aery/mlc";
 import {
     Guild,
     GuildChannel
@@ -15,29 +16,26 @@ export type ChannelComponentOptions = {
     index?: number
 }
 
-export type ChannelComponentCache = {
-    id?: string
-}
-
-export abstract class ChannelComponent<module extends Module<any, any>, options extends ChannelComponentOptions, cache extends ChannelComponentCache> extends Component<module, options, cache> {
+export abstract class ChannelComponent<module extends Module<any>, options extends ChannelComponentOptions> extends Component<module, options> {
 
     protected type: type;
     protected channel: GuildChannel;
 
-    constructor(module: module, options: options, cache: cache, type: type) {
+    constructor(module: module, options: options, cache: ConfigFile, type: type) {
         super(module, options, cache);
 
         this.type = type;
     }
 
     async init(guild: Guild): Promise<void> {
-        let channel: GuildChannel = guild.channels.get(this.cache.id);
+        let channel: GuildChannel = guild.channels.get(this.cache.content);
 
         if (channel) {
             this.channel = channel;
         } else {            
             this.channel = await guild.createChannel(this.options.name, this.type);
-            this.cache.id = this.channel.id;
+            this.cache.content = this.channel.id;
+            await this.cache.write();
         }
     }
 
@@ -61,11 +59,11 @@ export abstract class ChannelComponent<module extends Module<any, any>, options 
         let expected_index: number = 0;
         let actual_index: number = 0;
 
-        const grouped_expected_components: ChannelComponent<module, options, cache>[] = [];
+        const grouped_expected_components: ChannelComponent<module, options>[] = [];
         const grouped_actual_channels: GuildChannel[] = [];
 
         for (const id in this.module.components) {
-            const component: ChannelComponent<module, options, cache> = this.module.components[id];
+            const component: ChannelComponent<module, options> = this.module.components[id];
 
             if (component.options.parent == this.options.parent) {
                 grouped_expected_components.push(component);

@@ -1,34 +1,35 @@
-import { Module } from "../classes/Module";
+import {
+    Module,
+    component_constructor
+} from "../classes/Module";
 import { Guild } from "discord.js";
 import { Component } from "../classes/Component";
 
-type component_constructor<module, options, cache> = new (module: module, options: options, cache: cache) => Component<module, options, cache>
+export abstract class ChannelModule<options> extends Module<options> {
 
-export abstract class ChannelModule<options, cache> extends Module<options, cache> {
-
-    private _component: component_constructor<ChannelModule<options, cache>, options, cache>;
+    private _component: component_constructor<ChannelModule<options>, options>;
     private type: string;
 
-    constructor(component: component_constructor<ChannelModule<options, cache>, options, cache>, type: string) {
+    constructor(component: component_constructor<ChannelModule<options>, options>, type: string) {
         super();
 
         this._component = component;
         this.type = type;
     }
 
-    get component(): component_constructor<ChannelModule<options, cache>, options, cache> {
+    get component(): component_constructor<ChannelModule<options>, options> {
         return this._component;
     }
 
-    async cleanup(guild: Guild): Promise<void> {
+    async clean(guild: Guild): Promise<void> {
         for (const channel of guild.channels.array()) {
             if (channel.type == this.type) {
                 let cleanup: boolean = true;
 
                 for (const id in this.components) {
-                    const channel_component: Component<any, any, any> = this.components[id];
+                    const channel_component: Component<any, any> = this.components[id];
 
-                    if (channel_component.cache && channel_component.cache.id == channel.id) {
+                    if (channel_component.cache && channel_component.cache.content == channel.id) {
                         cleanup = false;
                     }
                 }

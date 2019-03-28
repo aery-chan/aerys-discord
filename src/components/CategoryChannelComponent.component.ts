@@ -1,13 +1,14 @@
+import { CategoryChannelModule } from "../modules/CategoryChannelModule.module";
 import {
     ChannelComponent,
-    ChannelComponentOptions,
-    ChannelComponentCache
+    ChannelComponentOptions
 } from "../classes/ChannelComponent";
-import { ChannelModule } from "../classes/ChannelModule";
 
-export class CategoryChannelComponent extends ChannelComponent<ChannelModule<ChannelComponentOptions, ChannelComponentCache>, ChannelComponentOptions, ChannelComponentCache> {
+import { ConfigFile } from "@aery/mlc";
 
-    constructor(module: ChannelModule<ChannelComponentOptions, ChannelComponentCache>, options: ChannelComponentOptions, cache: ChannelComponentCache) {
+export class CategoryChannelComponent extends ChannelComponent<CategoryChannelModule, ChannelComponentOptions> {
+
+    constructor(module: CategoryChannelModule, options: ChannelComponentOptions, cache: ConfigFile) {
         super(module, options, cache, "category");
     }
 
