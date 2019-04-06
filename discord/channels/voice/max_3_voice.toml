@@ -1,5 +1,0 @@
-[VoiceChannel]
-parent = "voice"
-name = "Max 3"
-max = 3
-index = 1
