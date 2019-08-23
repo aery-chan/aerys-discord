@@ -1,3 +1,8 @@
+**TLDR;** You should be good as long as:
+* You don't sue the [admin team](#noun-admin-team) or break the law
+* Follow Discord's ToS
+* Your intentions are good
+
 # Definitions & Clarifications
 
 ### *noun* admin team
@@ -8,13 +13,13 @@ Currently includes:
 # Ground Rules
 
 ### §g:a 
-Ground rule infractions will be punished in any way, decided by [the admin team](#noun-admin-team), appropriate for the severity of the infraction
+Ground rule infractions will be punished in any way, decided by the [admin team](#noun-admin-team), appropriate for the severity of the infraction
 
 ### §g:1  
-Do not get [the admin team](#noun-admin-team) in legal trouble
+Do not get the [admin team](#noun-admin-team) in legal trouble
 
 ### §g:2  
-Do not get [the admin team](#noun-admin-team) in trouble with Discord.  
+Do not get the [admin team](#noun-admin-team) in trouble with Discord.  
 i.e: Follow Discord's ToS and guidelines
 
 # Rules
@@ -22,13 +27,13 @@ i.e: Follow Discord's ToS and guidelines
 TODO: Have the community add and remove rules
 
 ### §a
-Rule infractions will be puished by [the admin team](#noun-admin-team) based on two factors:  
+Rule infractions will be puished by the [admin team](#noun-admin-team) based on two factors:  
 • The severity of the infraction  
 • How intentional the infraction is believed to be  
 
 📝 Note: You will not be punished if the rule infraction is believed to be unintentional  
 📝 Note: This does not apply for ground rules  
-TODO: Have the community decide punishments instead of [the admin team](#noun-admin-team)
+TODO: Have the community decide punishments instead of the [admin team](#noun-admin-team)
 
 ### §1  
 Do not negatively affect others
