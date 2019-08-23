@@ -33,4 +33,4 @@ TODO: Have the community decide punishments instead of the admin team
 ### §1  
 Do not negatively affect others
 
-📝 Note: This rule depends heavily on [./#a](§1)
+📝 Note: This rule depends heavily on and wouldn't exist without [§1](#a)
