@@ -1,9 +1,9 @@
 # Definitions & Clarifications
 
-(the) admin team:   
-&nbsp;&nbsp;&nbsp;&nbsp;Group of users responsible for server administration.  
-&nbsp;&nbsp;&nbsp;&nbsp;Currently includes:  
-&nbsp;&nbsp;&nbsp;&nbsp;• Aery (ID: 533792980503494656)
+### *noun* admin team
+Group of users responsible for server administration.  
+Currently includes:
+* Aery (ID: 533792980503494656)
 
 # Ground Rules
 
