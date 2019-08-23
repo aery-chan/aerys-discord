@@ -19,6 +19,8 @@ i.e: Follow Discord's ToS and guidelines
 
 # Rules
 
+TODO: Have the community add and remove rules
+
 ### §a
 Rule infractions will be puished by the admin team based on two factors:  
 • The severity of the infraction  
@@ -26,6 +28,9 @@ Rule infractions will be puished by the admin team based on two factors:
 
 📝 Note: You will not be punished if the rule infraction is believed to be unintentional  
 📝 Note: This does not apply for ground rules
+TODO: Have the community decide punishments instead of the admin team
 
 ### §1  
-Do not negatively affect others, physically or emotionally
+Do not negatively affect others
+
+📝 Note: This rule depends heavily on [./#a](§1)
