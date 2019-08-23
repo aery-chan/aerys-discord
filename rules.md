@@ -1,7 +1,7 @@
-**TLDR;** You should be good as long as:
-* You don't sue the [admin team](#noun-admin-team) or break the law
+**TLDR;** You should be good as long as you:
+* Don't sue the [admin team](#noun-admin-team) or break the law
 * Follow Discord's ToS
-* Your intentions are good
+* Have good intentions
 
 # Definitions & Clarifications
 
