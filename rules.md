@@ -1,14 +1,14 @@
 # Definitions & Clarifications
 
 (the) admin team:   
-    Group of users responsible for server administration.  
-    Currently includes:  
-    • Aery (ID: 533792980503494656)
+&nbsp;&nbsp;&nbsp;&nbsp;Group of users responsible for server administration.  
+&nbsp;&nbsp;&nbsp;&nbsp;Currently includes:  
+&nbsp;&nbsp;&nbsp;&nbsp;• Aery (ID: 533792980503494656)
 
 # Ground Rules
 
 ### §g:a 
-Ground rule violations will be punished in any way, decided by the admin team, appropriate for the severity of the infraction.
+Ground rule infractions will be punished in any way, decided by the admin team, appropriate for the severity of the infraction
 
 ### §g:1  
 Do not get the admin team in legal trouble
@@ -20,7 +20,7 @@ i.e: Follow Discord's ToS and guidelines
 # Rules
 
 ### §a
-Rule violations will be puished by the admin team based on two factors:  
+Rule infractions will be puished by the admin team based on two factors:  
 • The severity of the infraction  
 • How intentional the infraction is believed to be  
 
