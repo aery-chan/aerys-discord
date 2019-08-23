@@ -27,7 +27,7 @@ i.e: Follow Discord's ToS and guidelines
 TODO: Have the community add and remove rules
 
 ### §a
-Rule infractions will be puished by the [admin team](#noun-admin-team) based on two factors:  
+Rule infractions will be punished by the [admin team](#noun-admin-team) based on two factors:  
 • The severity of the infraction  
 • How intentional the infraction is believed to be  
 
