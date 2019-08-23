@@ -1,6 +1,6 @@
 **TLDR;** You should be good as long as you:
 * Don't sue the [admin team](#noun-admin-team) or break the law
-* Follow Discord's ToS
+* Follow Discord's ToS and guidelines
 * Have good intentions
 
 # Definitions & Clarifications
