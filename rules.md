@@ -19,7 +19,7 @@ Rule infractions will be punished by the [admin team](#noun-admin-team) based on
 
 Punishment = Severity * Intention
 
-Observe: This does not apply for ground rules
+Observe: This does not apply for ground rules  
 TODO: Have the community decide punishments instead of the [admin team](#noun-admin-team)
 
 ### §g:b.2
