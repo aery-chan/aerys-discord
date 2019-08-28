@@ -16,6 +16,21 @@ Currently includes:
 ### §g:a 
 Ground rule infractions will be punished in any way, decided by the [admin team](#noun-admin-team), appropriate for the severity of the infraction
 
+📝 Note: This does not apply for non-ground rules
+
+### §g:b
+Rule infractions will be punished by the [admin team](#noun-admin-team) based on two factors:
+* The severity of the infraction
+* How intentional the infraction is believed to be
+
+Punishment = Severity * Intention
+
+📝 Note: This does not apply for ground rules  
+TODO: Have the community decide punishments instead of the [admin team](#noun-admin-team)
+
+### §g:b.2
+You cannot be punished for an infraction if it is believed to be unintentional
+
 ### §g:1  
 Do not get the [admin team](#noun-admin-team) in legal trouble
 
@@ -27,16 +42,7 @@ i.e: Follow Discord's ToS and guidelines
 
 TODO: Have the community add and remove rules
 
-### §a
-Rule infractions will be punished by the [admin team](#noun-admin-team) based on two factors:  
-• The severity of the infraction  
-• How intentional the infraction is believed to be  
-
-📝 Note: You will not be punished if the rule infraction is believed to be unintentional  
-📝 Note: This does not apply for ground rules  
-TODO: Have the community decide punishments instead of the [admin team](#noun-admin-team)
-
 ### §1  
 Do not negatively affect others
 
-📝 Note: This rule depends heavily on intention being taken into account in rule [§a](#a)
+📝 Note: This rule depends heavily on intention being taken into account in rule [§g:b](#gb)
